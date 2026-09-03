@@ -1,0 +1,25 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{TC\_expression}
+\begin{tabular}{l*{5}{c}}
+\hline\hline
+                                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}\\
+                                &\multicolumn{1}{c}{express\_d}&\multicolumn{1}{c}{express\_d}&\multicolumn{1}{c}{express\_d}&\multicolumn{1}{c}{express\_d}&\multicolumn{1}{c}{express\_d}\\
+\hline
+main                            &                  &                  &                  &                  &                  \\
+Treat=1                         &  -0.0460         &  -0.0465         &  -0.0406         &  -0.0183         &  -0.0848         \\
+                                & (0.0877)         & (0.0879)         & (0.0867)         & (0.0902)         &  (0.470)         \\
+Sensitive Topics=1              &   -0.198\sym{***}&   -0.201\sym{***}&   -0.208\sym{***}&   -0.201\sym{***}&   -1.267\sym{***}\\
+                                & (0.0661)         & (0.0662)         & (0.0668)         & (0.0650)         &  (0.359)         \\
+Treat=1 $\times$ Sensitive      &    0.206\sym{**} &    0.207\sym{**} &    0.204\sym{**} &    0.186\sym{*}  &    1.081\sym{**} \\
+Topics=1                        & (0.0955)         & (0.0957)         & (0.0956)         & (0.0958)         &  (0.509)         \\
+\hline
+Mean                            &    0.300         &    0.300         &    0.300         &    0.300         &    0.300         \\
+SD                              &    0.463         &    0.463         &    0.463         &    0.463         &    0.463         \\
+IDs                             &      298         &      298         &      298         &      298         &      298         \\
+Obs                             &      669         &      669         &      669         &      669         &      668         \\
+\hline\hline
+\multicolumn{6}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.1\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

@@ -1,6 +1,11 @@
-title: "Stand-in title"
-author: "Dr Prof James 'JayJay' Author"
-paper_id: 12345678
+title: "Breaking the Spiral of Silence"
+author: "Huang"
 round: 1
-repo: "https://www.github.com/standin"
-dropbox_rel_path: "JPE/Author-12345678/1"
+repo: "https://github.com/JPE-Reproducibility/JPE-Huang-20241100"
+paper_id: 20241100
+journal: "JPE"
+paper_slug: "Huang-20241100"
+dropbox_rel_path: "JPE/Huang-20241100/1"
+package_size_gb: 0.01
+package_max_file_size_gb: 2
+package_max_pkg_size_gb: 10

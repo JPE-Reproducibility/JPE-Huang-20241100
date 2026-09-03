@@ -1,0 +1,108 @@
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/silence_master.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure 3.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure 4.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure 5.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure B2.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure D4.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure D5.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure D6.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure D7.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure E11.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table 1.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table 2.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table 3.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table B1.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C10.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C11.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C2.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C3.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C4.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C5.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C6.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C7.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C8.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table C9.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table D12.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table D13.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table D14.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table D15.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table D16.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table E17.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table E18.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table E19.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table E20.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table E21.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table E22.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Table E23.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/._silence_master.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure 3.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure 4.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure 5.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure B2.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure D4.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure D5.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure D6.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure D7.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure E11.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table 1.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table 2.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table 3.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table B1.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C10.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C11.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C2.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C3.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C4.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C5.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C6.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C7.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C8.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table C9.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table D12.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table D13.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table D14.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table D15.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table D16.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table E17.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table E18.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table E19.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table E20.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table E21.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table E22.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Table E23.do
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Code/Figure A1.ipynb
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/__MACOSX/Replication Package 20241100/Code/._Figure A1.ipynb
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/2sls_expression_majority_tc.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/2sls_expression_minority_tc.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/appropriateness_summary.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/attrition.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/attrition_v2.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/dist_private_silent.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/first_reduced_majority_tc.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/first_reduced_minority_tc.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/het_endline.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/het_midline.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/logit_expression_majority_tc_topic.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/logit_expression_minority_tc_topic.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/logit_first_movers_expression.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_expression_high_v.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_expression_majority_did.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_expression_majority_tc.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_expression_majority_tc_2025.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_expression_minority_did.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_expression_minority_tc.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_expression_minority_tc_2025.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_first_movers_expression.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_inference_did.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_inference_tc_2025.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_inference_tc_did.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/ols_inference_tc_revised.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/reg_anes_all.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/reg_anes_inperson.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/reg_first_movers_exp.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/reg_renaming.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/reg_tc_exp_extremity.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/reg_tc_guesses_extremity.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/summary_first_movers.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/summary_first_movers_r.tex
+/var/folders/5q/yhcyv3z55wvg6lhgc3h22kk00000gq/T/20241100-1/replication-package/Replication Package 20241100/Output/summary_ftc.tex

@@ -1,0 +1,27 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{midline\_inference}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+                                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                                &\multicolumn{1}{c}{guesses}&\multicolumn{1}{c}{guesses}&\multicolumn{1}{c}{guesses}&\multicolumn{1}{c}{guesses}\\
+\hline
+treat                           &   0.0251         &   0.0251         &   -0.512         &   -0.496         \\
+                                &  (1.159)         &  (1.159)         &  (1.090)         &  (1.114)         \\
+Post                            &    5.436\sym{***}&    3.555\sym{***}&    3.555\sym{***}&    3.555\sym{***}\\
+                                &  (0.889)         &  (0.719)         &  (0.721)         &  (0.722)         \\
+Treat X Post                    &   -8.490\sym{***}&   -6.512\sym{***}&   -6.512\sym{***}&   -6.512\sym{***}\\
+                                &  (1.329)         &  (1.101)         &  (1.104)         &  (1.106)         \\
+Endline                         &                  &    3.761\sym{***}&    3.761\sym{***}&    3.761\sym{***}\\
+                                &                  &  (1.169)         &  (1.173)         &  (1.174)         \\
+Treat X Endline                 &                  &   -3.955\sym{**} &   -3.955\sym{**} &   -3.955\sym{**} \\
+                                &                  &  (1.503)         &  (1.508)         &  (1.510)         \\
+\hline
+Mean                            &    63.09         &    63.09         &    63.09         &    63.09         \\
+SD                              &    22.25         &    22.25         &    22.25         &    22.25         \\
+IDs                             &      333         &      333         &      333         &      333         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.1\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

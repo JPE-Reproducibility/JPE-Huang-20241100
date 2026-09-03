@@ -1,0 +1,310 @@
+                                 Replication Package 
+
+                              Breaking the Spiral of Silence 
+
+                     Yuen Ho (Trinity College Dublin, Department of Economics) 
+                  Yihong Huang (Peking University, Guanghua School of Management) 
+
+          1. Overview 
+          This package reproduces every table and figure in the paper and its appendices. It contains 
+          data from surveys and experiments conducted by the authors with undergraduate students 
+          through the University of California, Berkeley’s Experimental Social Science Laboratory 
+          (Xlab), two extension experiments, and analysis of the American National Election Studies 
+          (ANES) survey data. 
+          All Stata analysis runs from one master file,  silence_master.do . Figure A.1 is produced 
+          separately by a Jupyter notebook. Section 8 maps every exhibit to the code that produces it, 
+          the file it writes, and the file the manuscript reads. 
+           
+
+          2. Data availability 
+
+          2.1 Summary 
+                                                            Provided 
+          Dataset                             Source            here      Access 
+          UC Berkeley Xlab experiments (baseline,     Collected by the      Yes       — 
+          midline, endline surveys; Zoom session      authors via Qualtrics 
+          rosters) 
+          Renaming committee extension experiment   Collected by the      Yes       — 
+                                           authors via Qualtrics 
+          Polarization / extremity extension          Collected by the      Yes       — 
+          experiment                          authors via Qualtrics 
+          American National Election Studies, 1974–   ANES             Extract     Public 
+          2020                                               only 
+
+           
+
+          2.2 Data collected by the authors 
+          All experimental data were collected by the authors using Qualtrics, with participants 
+          recruited from the UC Berkeley Xlab subject pool. 
+          On “raw” versus “analysis” data. The raw data were collected via surveys on Qualtrics, so 
+          there is no methodological cleaning stage: the data as received from Qualtrics are already           one row per respondent, one column per item. The files in  data/  are close to the Qualtrics 
+          exports, there were only two changes that were made between download and analysis of 
+          the Qualtrics data: 
+            •  De-identification. We removed identifiable information from every dataset that 
+               included them: ResponseId, IPAddress, LocationLatitude, LocationLongitude, email, 
+               first_name, last_name, login_id, twitter_handle, the Qualtrics panel fields 
+               RecipientEmail / RecipientFirstName / RecipientLastName / ExternalReference, 
+               and grantor. Every UC Berkeley Xlab (SONA) participant number appearing in the 
+               deposited data was mapped through a single global crosswalk to a new ID. 
+           •   Renaming the variables. See the codebook for detailed variable names and labels.    
+                
+          2.3 Third-party data 
+          American National Election Studies. data/anes_full.csv  and  anes_full_inperson.csv  
+          are extracts aggregated to the year × topic level (448 rows each) from the ANES Time 
+          Series Cumulative Data File, covering 1974–2020.  
+
+          3. Rights and license 
+           •   The authors certify that they have legitimate access to, and permission to use, all 
+               data employed in this manuscript. 
+           •   The authors certify that they have permission to redistribute and publish the data 
+               included in this package, and that any restrictions are documented in  LICENSE.txt . 
+
+          4. Contents 
+          .  
+          ├── README.pdf                 this file  
+          ├── LICENSE.txt                  
+          ├── silence_master.do          master file — runs all Stata analysis  
+          ├── Codebook.pdf                 
+          ├── data/                      analysis datasets, de-identified (§2)  
+          │   └── csv/                   plain-text copies   
+          ├── Code/                      one script per exhibit (§8)  
+          ├── Experiment/                Experimental documentation and IRB(§9)  
+          │   ├── experimental_design_randomization_sampling.pdf  
+          │   ├── survey_instructions.pdf  
+          │   ├── IRB_approval (4 pdf)  
+          │  
+          ├── Output/                    all tables (.tex) and figures (.png)  
+          ├── logs/                      run logs, written by the master file  
+          └── Tempfiles/                 intermediate files written during the run 
+
+           
+
+                     4.1 Datasets 
+          File                            N     Used by 
+          recruit_baseline_roster_TC.dta       454    Figure 3, Figure B.2 
+          recruitment_baseline.dta            95     Table B.1 
+          recruitment_baseline_2nd.dta        353    Figure E.11 
+          first_movers_analysis.dta           50     Table 1, Tables C.5, C.6 
+          TC_cleaned.dta                    333    Tables 2, 3; Figures 4, 5; Tables C.7–
+                                               C.11, D.12–D.16; Figures D.3–D.7 
+          TC_cleaned_2nd.dta                 201    Figure E.11, Tables E.21, E.22 
+          TC_first_movers_merged.dta          383    Table C.2 
+          attrition.dta                     454    Tables C.3, C.4 
+          extremity_first_movers_cleaned.dta   35     Table E.17 
+          extremity_TC_merged.dta             123    Tables E.18, E.19 
+          Berkeley_renaming.xlsx              254    Table E.20 
+          anes_full.csv ,                    448    Table E.23 
+          anes_full_inperson.csv              each 
+
+          We also provide a  .csv  copy of each  .dta .  
+           
+
+          5. Computational requirements 
+
+          5.1 Stata 
+          Run with Stata 18 on macOS Sequoia 
+          The following user-written commands are required: 
+
+          Command              Package         Install 
+          esttab ,  eststo ,  estadd      estout           ssc install estout  
+          distinct               distinct         ssc install distinct  
+          cibar                  cibar            ssc install cibar  
+          splitvallabels          labutil2         ssc install labutil2  
+          heatplot               heatplot         ssc install heatplot  
+          — (dependencies of       palettes ,        ssc install palettes  /  ssc install 
+          heatplot )              colrspace        colrspace  
+
+          fmm  (Table D.15) and  suest  (Table 2) are Stata commands;  fmm  requires Stata 15 or later. 
+
+          5.2 Python (Figure A.1 only) 
+
+          Code/Figure A1.ipynb  requires  numpy ,  numba  and  matplotlib              
+
+          6. Instructions to replicators 
+           1.  Download the package and keep the folder structure intact. 
+           2.  Open  silence_master.do  and edit the single path line near the top: 
+
+               global userpath "/path/to/this/package"  
+
+               The other globals ( $data ,  $output ,  $tempfile ,  $code ,  $logs ) derive from it and 
+               should not need editing. 
+           3.  Install the Stata commands listed in §5.1. 
+           4.  Run  silence_master.do . All tables and figures are written to  Output/ ; the full run is 
+               logged to  logs/silence_master.log . 
+
+           5.  For Figure A.1, install the Python dependencies numpy ,  numba  and  matplotlib , then 
+               open  Code/Figure A1.ipynb  from the  Code/  directory and run all cells. It writes 
+               Output/figure_A1.png  plus the four individual panels.  
+
+          6.1 Output displayed rather than saved 
+          Every exhibit writes a file to  Output/  except Table D.15, which reports finite-mixture 
+          estimates read off the Stata output. The master file captures it in  logs/Table_D15.log , and 
+          Code/Table D15.do  documents which part of that output feeds each cell of the table. 
+          The other thing that appears in  logs/silence_master.log  rather than in a file: 
+           •   The  SUEST  rows of Table 2 — see §8.1. 
+           
+
+          7. Runtime 
+           •   silence_master.do : approximately 1 minute 
+           •   Code/Figure A1.ipynb : approximately 30 seconds 
+           
+
+          8. List of exhibits 
+
+          Every exhibit traces through two stages inside this package: a script in  Code/  produces a 
+          file in  Output/ ; that file is copied into the manuscript source (usually renamed, and where 
+          the paper shows a two-panel table, two  Output/  files are merged into one). The manuscript 
+          source and the compiled paper are deposited separately, so the last column below names 
+          the file as it appears there rather than a file included here. 
+          Figures 1, 2, E.8, E.9 and E.10 are images of the experimental materials shown to 
+          participants and are not produced by code.                     Code 
+          Exhibit     (Code/ )     Produced file ( Output/ )    File in manuscript source 
+          Figure 1    —         —                   Graphs/aa_C.png, 
+                   (experiment                       Graphs/aa_T.png 
+                   al material) 
+          Figure 2    —         —                   Graphs/exp_design.png 
+                   (experiment
+                   al material) 
+          Figure 3    Figure 3.do   private_perceived_a.png    Graphs/private_perceived_a.png 
+          Table 1    Table 1.do    ols_first_movers_expressio Tables/reg_first_movers_express
+                              n.tex (A);              ion.tex 
+                              logit_first_movers_express
+                              ion.tex (B) 
+          Figure 4    Figure 4.do   inference_midline_2.png    Graphs/inference_midline_2.png 
+          Table 2    Table 2.do    ols_inference_tc_revised.te Tables/reg_inference_tc.tex 
+                              x + SUEST rows from the 
+                              log 
+          Table 3    Table 3.do    ols_expression_minority_t  Tables/reg_expression_tc.tex 
+                              c.tex (A); 
+                              ols_expression_majority_tc
+                              .tex (B) 
+          Figure 5    Figure 5.do   inference_rename_schools. same four files in Graphs/ 
+                              png;inference_death_penal
+                              ty.png;inference_affirmati
+                              ve_action.png;inference_i
+                              mmunizations.png 
+          Figure A.1  Figure      figure_A1.png (+ four      Graphs/figure_A1.png 
+                   A1.ipynb     panel files) 
+          Table B.1   Table B1.do   appropriateness_summary Tables/appropriateness_summar
+                              .tex                  y.tex 
+          Figure B.2  Figure      private_perceived_TC.png  Graphs/private_perceived_TC.pn
+                   B2.do                            g 
+          Table C.2   Table C2.do   summary_ftc.tex         Tables/summary_ftc.tex 
+          Table C.3   Table C3.do   attrition.tex            Tables/attrition.tex 
+          Table C.4   Table C4.do   attrition_v2.tex          Tables/attrition_v2.tex 
+          Table C.5   Table C5.do   summary_first_movers.tex  Tables/summary_first_movers.te
+                                                   x 
+          Table C.6   Table C6.do   summary_first_movers_r.t  Tables/summary_first_movers_r.
+                              ex                   tex 
+          Table C.7   Table C7.do   logit_expression_minority_ Tables/reg_expresssion_topic.tex 
+                              tc_topic.tex (A);                    Code 
+          Exhibit     (Code/ )     Produced file ( Output/ )    File in manuscript source 
+                              logit_expression_majority_
+                              tc_topic.tex (B) 
+           Table C.8   Table C8.do   first_reduced_minority_tc.t Tables/2sls_first_reduced.tex 
+                              ex (A); 
+                              first_reduced_majority_tc.t
+                              ex (B) 
+          Table C.9   Table C9.do   2sls_expression_minority_  Tables/2sls_expression_tc.tex 
+                              tc.tex (A); 
+                              2sls_expression_majority_t
+                              c.tex (B) 
+          Table C.10  Table      ols_inference_tc_did.tex    Tables/reg_inference_tcd_did.tex 
+                   C10.do  
+          Table C.11  Table      dist_private_silent.tex     Tables/dist_private_silent.tex 
+                   C11.do  
+          Figure D.3  Figure 5.do   inference_daylight_saving.  Graphs/inference_daylight_savin
+                              png                  g.png 
+          Figure D.4  Figure      bar_express_dst.png      Graphs/bar_express_dst.png 
+                   D4.do  
+          Table D.12  Table      ols_inference_did.tex      Tables/reg_inference_did.tex 
+                   D12.do  
+          Table D.13  Table      ols_expression_minority_d Tables/reg_expression_did.tex 
+                   D13.do       id.tex (A); 
+                              ols_expression_majority_di
+                              d.tex (B) 
+          Table D.14  Table      het_midline.tex (A);       Tables/het_demographics_v2.tex 
+                   D14.do       het_endline.tex (B) 
+          Figure D.5  Figure      kdensity_rename_schools.  same four files in Graphs/ 
+                   D5.do        png;kdensity_death_penalt
+                              y.png;kdensity_affirmative
+                              _action.png;kdensity_imm
+                              unizations.png 
+          Table D.15  Table      (none — see            Tables/ffm_midline.tex 
+                   D15.do       logs/Table_D15.log ) 
+          Table D.16  Table      ols_expression_high_v.tex   Tables/reg_expression_high_v.te
+                   D16.do                            x 
+          Figure D.6  Figure      bar_express_trans_athletes Graphs/bar_express_trans_athlet
+                   D6.do        .png                  es.png 
+          Figure D.7  Figure      corr_heatmap.png        Graphs/corr_heatmap.png 
+                   D7.do  
+          Figure E.8   —         —                   Graphs/Polarization_C.png,                    Code 
+          Exhibit     (Code/ )     Produced file ( Output/ )    File in manuscript source 
+                   (experiment                       _T.png  
+                   al material) 
+          Table E.17  Table      reg_first_movers_exp.tex   Tables/reg_first_movers_exp.tex 
+                   E17.do  
+          Table E.18  Table      reg_tc_guesses_extremity.t Tables/reg_tc_guesses_extremity.
+                   E18.do       ex                   tex 
+          Table E.19  Table      reg_tc_exp_extremity.tex   Tables/reg_tc_exp_extremity.tex 
+                   E19.do  
+          Figure E.9   —         —                   Graphs/Berkeley_Renaming_C.pn
+                   (experiment                       g, _T.png, _P.png 
+                   al material) 
+          Table E.20  Table      reg_renaming.tex        Tables/reg_renaming.tex 
+                   E20.do  
+          Figure E.10  —         —                   Graphs/New_Control.png, 
+                   (experiment                       Graphs/New_Treatment.png 
+                   al material) 
+          Figure E.11  Figure      inference_rename_schools same four files in Graphs/ 
+                   E11.do       _2025.png; 
+                              inference_death_penalty_2
+                              025.png; 
+                              inference_affirmative_acti
+                              on_2025.png; 
+                              inference_marijuana_2025
+                              .png 
+          Table E.21  Table      ols_inference_tc_2025.tex   Tables/reg_inference_tc_2025.te
+                   E21.do                            x 
+          Table E.22  Table      ols_expression_minority_t  Tables/reg_expression_tc_2025.t
+                   E22.do       c_2025.tex (A);          ex 
+                              ols_expression_majority_tc
+                              _2025.tex (B) 
+          Table E.23  Table      reg_anes_all.tex (A);       Tables/reg_anes.tex 
+                   E23.do       reg_anes_inperson.tex (B) 
+
+           
+
+          8.1 Notes on the mapping 
+           •   The  SUEST  row in Table 2— chi2(1) statistics 10.54, 10.55, 8.26 with p-values 
+               0.0012, 0.0012, 0.0040 — is displayed in the Stata log only and transcribed by hand; 
+               Table 2.do  runs the  suest  tests but does not write it to  Output/ . The three values 
+               have been verified against the data and are correct as computed.  
+           •   Table D.15 is the only exhibit with no file in  Output/ ; see §6.1.            •   Panel merges. Tables 1, 3, C.7, C.8, C.9, D.13, D.14, E.22 and E.23 each combine two 
+               Output/  files into a single file in the manuscript. 
+           •   Renaming. Some draft filenames differ from the  Output/  filenames they come from 
+               (ols_inference_tc_revised.tex  →  reg_inference_tc.tex ).  
+
+           
+
+          9. Human subjects and experimental documentation 
+
+          This project was approved by the Institutional Review Board at Harvard University 
+          (IRB22-0757) and at the University of California, Berkeley (2022-11-15819 and 2023-
+          08-16614). The experiment was pre-registered in the AEA RCT Registry as AEARCTR-
+          0009505. 
+          We also include the following experimental documentations as separate PDFs:  
+           •   Experimental design document + Participant recruitment, selection and eligibility 
+               criteria 
+           •   Survey instructions  
+           •   IRB approval letters from both institutions 
+           
+
+          10. Data citations 
+
+          American National Election Studies. 2022. ANES Time Series Cumulative Data File (1948–2020) 
+          [dataset and documentation]. September 16, 2022 version. www.electionstudies.org 
+
+          Ho, Yuen, and Yihong Huang. 2026. "Data and Code for: Breaking the Spiral of Silence."  
+
+           

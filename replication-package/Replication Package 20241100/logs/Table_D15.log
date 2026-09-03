@@ -1,0 +1,1649 @@
+------------------------------------------------------------------------------------------------------
+      name:  exhibit
+       log:  /Users/yihong/Desktop/Silence Replicate Final/logs/Table_D15.log
+  log type:  text
+ opened on:  27 Aug 2026, 11:52:34
+
+. do "$code/Table D15.do"       // sets its own seed; fmm is not reproducible without one
+
+. *** Table D.15: Treatment Effects on Latent Attention Types Across Topics
+. ***
+. *** Displayed output only -- captured in logs/Table_D15.log by the master file.
+. *** The table is assembled by hand into Draft tex/Tables/ffm_midline.tex.
+. ***
+. *==============================================================================
+. * WHERE EACH CELL OF TABLE D.15 COMES FROM
+. *
+. * The table has one COLUMN per topic, in this order:
+. *     (1) Renaming Schools   (2) Affirmative Action
+. *     (3) Death Penalty      (4) Immunizations
+. * and five ROWS. For each topic the numbers are read off the output of the two
+. * commands marked [A] and [B] in the loop below:
+. *
+. *   Row "%Agree, Type 1"      -> [A] the _cons of the regress equation for the
+. *   Row "%Agree, Type 2"          component with the LOWER (Type 1) and HIGHER
+. *                                 (Type 2) estimated mean, with its standard
+. *                                 error in parentheses beneath.
+. *
+. *   Row "Pr(Type 1| Control)" -> [B] the margins table, row treat = 0
+. *   Row "Pr(Type 1| Treat)"   -> [B] the margins table, row treat = 1
+. *                                 (delta-method standard errors in parentheses)
+. *
+. *   Row "p-value"             -> [A] the latent-class probability equation, the
+. *                                 p-value on 1.treat
+. *
+. * The -fmm 1- / -fmm 2- pairs with -estat ic- are not in the table. They are the
+. * one- versus two-component BIC comparison that motivates using two components;
+. * the two BIC values are noted in the comment beside each -estat ic-.
+. *==============================================================================
+. 
+. set seed 20260820
+
+. 
+. **** Test if posteriors are bimodal ****
+. use "$data/TC_cleaned.dta", clear
+(TC_cleaned -- de-identified 21 Aug 2026)
+
+. 
+. keep *rename_schools *affirmative_action *death_penalty *immunizations *daylight_saving ///
+>          treat e_* gender race year major ideology survey_id zoom_id moderator week group_size sessi
+> on_time
+
+. 
+. 
+. foreach var in rename_schools affirmative_action death_penalty immunizations{
+  2.         rename guesses_`var' guesses_b_`var'
+  3. 
+. }
+
+. 
+. local label_rename_schools "Renaming Schools"
+
+. local label_affirmative_action "Affirmative Action"
+
+. local label_death_penalty "Death Penalty"
+
+. local label_immunizations "Immunizations"
+
+. 
+. 
+. 
+. * finite mixture model: "two types" + treatment shifts their share
+. 
+. *------------------------------------------------------------------ COLUMN (1)
+. local y guesses_m_rename_schools
+
+. 
+. fmm 1: regress `y'
+
+Iteration 0:  Log likelihood = -1307.0655  
+Iteration 1:  Log likelihood = -1307.0655  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1307.0655
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_rename_s~s
+Model:    regress             
+
+-------------------------------------------------------------------------------------------------
+                                | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+guesses_m_rename_schools        |
+                          _cons |   53.17718   .6717372    79.16   0.000      51.8606    54.49376
+--------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_rename_schools)|   150.2599   11.64491                      129.0852    174.9081
+-------------------------------------------------------------------------------------------------
+
+. estat ic
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        333          .  -1307.066       2   2618.131   2625.747
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.
+
+. fmm 2: regress `y'
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -230.81651  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1192.0431  
+Iteration 1:  (outcome) log likelihood = -1192.0431  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1464.0402
+Iteration 1:  (EM) log likelihood = -1484.7789
+Iteration 2:  (EM) log likelihood = -1497.1856
+Iteration 3:  (EM) log likelihood = -1505.2091
+Iteration 4:  (EM) log likelihood = -1510.5042
+Iteration 5:  (EM) log likelihood = -1513.4739
+Iteration 6:  (EM) log likelihood = -1513.2669
+Iteration 7:  (EM) log likelihood = -1509.5201
+Iteration 8:  (EM) log likelihood = -1503.5343
+Iteration 9:  (EM) log likelihood = -1496.5358
+Iteration 10: (EM) log likelihood = -1489.6225
+Iteration 11: (EM) log likelihood = -1483.5605
+Iteration 12: (EM) log likelihood = -1478.6753
+Iteration 13: (EM) log likelihood = -1474.9636
+Iteration 14: (EM) log likelihood = -1472.2573
+Iteration 15: (EM) log likelihood = -1470.3337
+Iteration 16: (EM) log likelihood = -1468.9858
+Iteration 17: (EM) log likelihood = -1468.0455
+Iteration 18: (EM) log likelihood = -1467.3869
+Iteration 19: (EM) log likelihood = -1466.9199
+Iteration 20: (EM) log likelihood = -1466.5819
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1288.9615  (not concave)
+Iteration 1:  Log likelihood = -1288.9457  (backed up)
+Iteration 2:  Log likelihood = -1288.8701  
+Iteration 3:  Log likelihood = -1288.7269  
+Iteration 4:  Log likelihood = -1288.7261  
+Iteration 5:  Log likelihood = -1288.7261  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1288.7261
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+       _cons |    1.08137    .701949     1.54   0.123    -.2944252    2.457164
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_rename_s~s
+Model:    regress             
+
+-------------------------------------------------------------------------------------------------
+                                | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+guesses_m_rename_schools        |
+                          _cons |   51.97693   3.292168    15.79   0.000     45.52439    58.42946
+--------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_rename_schools)|   389.2224    129.202                      203.0684     746.025
+-------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_rename_s~s
+Model:    regress             
+
+-------------------------------------------------------------------------------------------------
+                                | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+guesses_m_rename_schools        |
+                          _cons |   53.58422   .8216318    65.22   0.000     51.97385    55.19459
+--------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_rename_schools)|   68.56613   18.11758                      40.85001    115.0872
+-------------------------------------------------------------------------------------------------
+
+. estat ic  //2625.7-2606.5
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        333          .  -1288.726       5   2587.452   2606.493
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.
+
+. 
+. * [A] component means -> rows "%Agree, Type 1" and "%Agree, Type 2"
+. *     latent-class equation -> row "p-value" (p on 1.treat)
+. fmm 2, lcprob(i.treat): regress `y'
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -76.769923  
+Iteration 2:  (class) log likelihood = -75.635509  
+Iteration 3:  (class) log likelihood = -75.635109  
+Iteration 4:  (class) log likelihood = -75.635109  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1262.3491  
+Iteration 1:  (outcome) log likelihood = -1262.3491  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1358.4995
+Iteration 1:  (EM) log likelihood = -1359.1852
+Iteration 2:  (EM) log likelihood = -1357.1693
+Iteration 3:  (EM) log likelihood = -1354.8274
+Iteration 4:  (EM) log likelihood = -1352.5652
+Iteration 5:  (EM) log likelihood = -1350.4536
+Iteration 6:  (EM) log likelihood = -1348.5009
+Iteration 7:  (EM) log likelihood = -1346.7024
+Iteration 8:  (EM) log likelihood = -1345.0511
+Iteration 9:  (EM) log likelihood = -1343.5395
+Iteration 10: (EM) log likelihood = -1342.1599
+Iteration 11: (EM) log likelihood = -1340.9048
+Iteration 12: (EM) log likelihood = -1339.7665
+Iteration 13: (EM) log likelihood = -1338.7379
+Iteration 14: (EM) log likelihood = -1337.8121
+Iteration 15: (EM) log likelihood = -1336.9821
+Iteration 16: (EM) log likelihood = -1336.2417
+Iteration 17: (EM) log likelihood = -1335.5847
+Iteration 18: (EM) log likelihood = -1335.0053
+Iteration 19: (EM) log likelihood = -1334.4979
+Iteration 20: (EM) log likelihood = -1334.0574
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1286.4314  (not concave)
+Iteration 1:  Log likelihood = -1286.4008  (backed up)
+Iteration 2:  Log likelihood = -1285.5532  
+Iteration 3:  Log likelihood = -1284.8163  
+Iteration 4:  Log likelihood = -1284.3839  
+Iteration 5:  Log likelihood =  -1284.355  
+Iteration 6:  Log likelihood = -1284.3539  
+Iteration 7:  Log likelihood = -1284.3538  
+Iteration 8:  Log likelihood = -1284.3538  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1284.3538
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+     1.treat |  -15.47657    430.638    -0.04   0.971    -859.5115    828.5583
+       _cons |   16.40781    430.638     0.04   0.970    -827.6272    860.4429
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_rename_s~s
+Model:    regress             
+
+-------------------------------------------------------------------------------------------------
+                                | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+guesses_m_rename_schools        |
+                          _cons |   38.87238   5.913628     6.57   0.000     27.28188    50.46287
+--------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_rename_schools)|   210.3388   53.93844                       127.245    347.6947
+-------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_rename_s~s
+Model:    regress             
+
+-------------------------------------------------------------------------------------------------
+                                | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+guesses_m_rename_schools        |
+                          _cons |   55.53974   .8155211    68.10   0.000     53.94134    57.13813
+--------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_rename_schools)|   100.9647   9.107393                      84.60345      120.49
+-------------------------------------------------------------------------------------------------
+
+. 
+. * [B] -> rows "Pr(Type 1| Control)" (treat = 0) and "Pr(Type 1| Treat)" (treat = 1)
+. margins treat, predict(classpr)
+
+Adjusted predictions                                       Number of obs = 333
+Model VCE: OIM
+
+Expression: Predicted probability (1.Class), predict(classpr)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |
+          0  |   7.48e-08   .0000322     0.00   0.998    -.0000631    .0000632
+          1  |    .282672   .1490483     1.90   0.058    -.0094572    .5748012
+------------------------------------------------------------------------------
+
+. 
+. *------------------------------------------------------------------ COLUMN (2)
+. local y guesses_m_affirmative_action
+
+. 
+. fmm 1: regress `y'
+
+Iteration 0:  Log likelihood = -1310.6673  
+Iteration 1:  Log likelihood = -1310.6673  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1310.6673
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_affirmat~n
+Model:    regress             
+
+-----------------------------------------------------------------------------------------------------
+                                    | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------------------------+----------------------------------------------------------------
+guesses_m_affirmative_action        |
+                              _cons |   54.26426   .6790423    79.91   0.000     52.93337    55.59516
+------------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_affirmative_action)|   153.5458   11.89956                       131.908     178.733
+-----------------------------------------------------------------------------------------------------
+
+. estat ic
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        333          .  -1310.667       2   2625.335   2632.951
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.
+
+. 
+. fmm 2: regress `y'
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -230.81651  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood =  -1165.911  
+Iteration 1:  (outcome) log likelihood =  -1165.911  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1443.5424
+Iteration 1:  (EM) log likelihood = -1467.0555
+Iteration 2:  (EM) log likelihood = -1480.7139
+Iteration 3:  (EM) log likelihood = -1489.0287
+Iteration 4:  (EM) log likelihood =  -1493.897
+Iteration 5:  (EM) log likelihood = -1496.2852
+Iteration 6:  (EM) log likelihood = -1496.8395
+Iteration 7:  (EM) log likelihood = -1496.1004
+Iteration 8:  (EM) log likelihood =  -1494.548
+Iteration 9:  (EM) log likelihood = -1492.5935
+Iteration 10: (EM) log likelihood = -1490.5555
+Iteration 11: (EM) log likelihood = -1488.6494
+Iteration 12: (EM) log likelihood = -1486.9897
+Iteration 13: (EM) log likelihood = -1485.6153
+Iteration 14: (EM) log likelihood = -1484.5166
+Iteration 15: (EM) log likelihood = -1483.6592
+Iteration 16: (EM) log likelihood = -1483.0003
+Iteration 17: (EM) log likelihood = -1482.4984
+Iteration 18: (EM) log likelihood = -1482.1169
+Iteration 19: (EM) log likelihood = -1481.8263
+Iteration 20: (EM) log likelihood = -1481.6032
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1297.3551  
+Iteration 1:  Log likelihood = -1297.3309  
+Iteration 2:  Log likelihood = -1297.3275  
+Iteration 3:  Log likelihood = -1297.3275  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1297.3275
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+       _cons |   .6032778     .98001     0.62   0.538    -1.317507    2.524062
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_affirmat~n
+Model:    regress             
+
+-----------------------------------------------------------------------------------------------------
+                                    | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------------------------+----------------------------------------------------------------
+guesses_m_affirmative_action        |
+                              _cons |    50.5134   4.838785    10.44   0.000     41.02956    59.99725
+------------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_affirmative_action)|   291.6608   72.25826                      179.4713    473.9813
+-----------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_affirmat~n
+Model:    regress             
+
+-----------------------------------------------------------------------------------------------------
+                                    | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------------------------+----------------------------------------------------------------
+guesses_m_affirmative_action        |
+                              _cons |   56.31605   .9645288    58.39   0.000     54.42561    58.20649
+------------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_affirmative_action)|   66.08894   32.07175                      25.53032    171.0808
+-----------------------------------------------------------------------------------------------------
+
+. estat ic  //2633-2623.7
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        333          .  -1297.327       5   2604.655   2623.696
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.
+
+. 
+. * [A] see the header block
+. fmm 2, lcprob(i.treat): regress `y'
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -91.533119  
+Iteration 2:  (class) log likelihood = -91.259455  
+Iteration 3:  (class) log likelihood = -91.258554  
+Iteration 4:  (class) log likelihood = -91.258554  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1255.4051  
+Iteration 1:  (outcome) log likelihood = -1255.4051  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1378.5438
+Iteration 1:  (EM) log likelihood = -1387.5649
+Iteration 2:  (EM) log likelihood = -1391.9063
+Iteration 3:  (EM) log likelihood = -1394.9093
+Iteration 4:  (EM) log likelihood = -1397.4262
+Iteration 5:  (EM) log likelihood =  -1399.712
+Iteration 6:  (EM) log likelihood = -1401.8525
+Iteration 7:  (EM) log likelihood = -1403.8798
+Iteration 8:  (EM) log likelihood = -1405.8088
+Iteration 9:  (EM) log likelihood = -1407.6476
+Iteration 10: (EM) log likelihood = -1409.4021
+Iteration 11: (EM) log likelihood = -1411.0769
+Iteration 12: (EM) log likelihood = -1412.6753
+Iteration 13: (EM) log likelihood =    -1414.2
+Iteration 14: (EM) log likelihood = -1415.6533
+Iteration 15: (EM) log likelihood = -1417.0367
+Iteration 16: (EM) log likelihood = -1418.3514
+Iteration 17: (EM) log likelihood = -1419.5984
+Iteration 18: (EM) log likelihood = -1420.7781
+Iteration 19: (EM) log likelihood = -1421.8908
+Iteration 20: (EM) log likelihood = -1422.9366
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood =   -1291.72  (not concave)
+Iteration 1:  Log likelihood = -1291.1927  
+Iteration 2:  Log likelihood = -1289.4159  
+Iteration 3:  Log likelihood = -1289.1896  
+Iteration 4:  Log likelihood = -1289.1616  
+Iteration 5:  Log likelihood = -1289.1615  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1289.1615
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+     1.treat |  -2.403284   .7082579    -3.39   0.001    -3.791444   -1.015124
+       _cons |   3.052292   .8286015     3.68   0.000     1.428263    4.676321
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_affirmat~n
+Model:    regress             
+
+-----------------------------------------------------------------------------------------------------
+                                    | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------------------------+----------------------------------------------------------------
+guesses_m_affirmative_action        |
+                              _cons |   41.13353   5.491717     7.49   0.000     30.36996     51.8971
+------------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_affirmative_action)|   199.5062   51.54127                      120.2412    331.0239
+-----------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_affirmat~n
+Model:    regress             
+
+-----------------------------------------------------------------------------------------------------
+                                    | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------------------------+----------------------------------------------------------------
+guesses_m_affirmative_action        |
+                              _cons |   57.43719   .8143564    70.53   0.000     55.84108     59.0333
+------------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_affirmative_action)|    90.7098   9.506493                      73.86646    111.3938
+-----------------------------------------------------------------------------------------------------
+
+. * [B] see the header block
+. margins treat, predict(classpr)
+
+Adjusted predictions                                       Number of obs = 333
+Model VCE: OIM
+
+Expression: Predicted probability (1.Class), predict(classpr)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |
+          0  |   .0451186   .0356986     1.26   0.206    -.0248493    .1150865
+          1  |    .343213    .148752     2.31   0.021     .0516645    .6347615
+------------------------------------------------------------------------------
+
+. 
+. 
+. *------------------------------------------------------------------ COLUMN (3)
+. local y guesses_m_death_penalty
+
+. fmm 1: regress `y'
+
+Iteration 0:  Log likelihood = -1329.0824  
+Iteration 1:  Log likelihood = -1329.0824  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1329.0824
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_death_pe~y
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_death_penalty        |
+                         _cons |   66.59159   .7176515    92.79   0.000     65.18502    67.99816
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_death_penalty)|   171.5029    13.2912                      147.3346    199.6357
+------------------------------------------------------------------------------------------------
+
+. estat ic
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        333          .  -1329.082       2   2662.165   2669.781
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.
+
+. 
+. fmm 2: regress `y'
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -230.81651  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1168.8212  
+Iteration 1:  (outcome) log likelihood = -1168.8212  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1433.3108
+Iteration 1:  (EM) log likelihood = -1452.2792
+Iteration 2:  (EM) log likelihood = -1464.7794
+Iteration 3:  (EM) log likelihood = -1473.5393
+Iteration 4:  (EM) log likelihood = -1479.8702
+Iteration 5:  (EM) log likelihood = -1484.5296
+Iteration 6:  (EM) log likelihood = -1487.9996
+Iteration 7:  (EM) log likelihood = -1490.6074
+Iteration 8:  (EM) log likelihood = -1492.5784
+Iteration 9:  (EM) log likelihood = -1494.0721
+Iteration 10: (EM) log likelihood = -1495.2032
+Iteration 11: (EM) log likelihood = -1496.0548
+Iteration 12: (EM) log likelihood = -1496.6883
+Iteration 13: (EM) log likelihood = -1497.1493
+Iteration 14: (EM) log likelihood = -1497.4723
+Iteration 15: (EM) log likelihood =  -1497.684
+Iteration 16: (EM) log likelihood = -1497.8049
+Iteration 17: (EM) log likelihood = -1497.8512
+Iteration 18: (EM) log likelihood = -1497.8358
+Iteration 19: (EM) log likelihood = -1497.7691
+Iteration 20: (EM) log likelihood = -1497.6592
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1315.6037  
+Iteration 1:  Log likelihood = -1314.9747  
+Iteration 2:  Log likelihood = -1314.8237  
+Iteration 3:  Log likelihood =   -1314.81  
+Iteration 4:  Log likelihood = -1314.8097  
+Iteration 5:  Log likelihood = -1314.8097  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1314.8097
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+       _cons |   1.249313   .9710799     1.29   0.198    -.6539682    3.152595
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_death_pe~y
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_death_penalty        |
+                         _cons |     54.121    8.81327     6.14   0.000      36.8473    71.39469
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_death_penalty)|   239.1771   77.26789                      126.9793    450.5121
+------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_death_pe~y
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_death_penalty        |
+                         _cons |   70.16693    1.40736    49.86   0.000     67.40856    72.92531
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_death_penalty)|   94.73088   20.47771                      62.01399    144.7083
+------------------------------------------------------------------------------------------------
+
+. estat ic //2669.8-2658.7
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        333          .   -1314.81       5   2639.619    2658.66
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.
+
+. 
+. * [A] see the header block
+. fmm 2, lcprob(i.treat): regress `y'
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -134.20722  
+Iteration 2:  (class) log likelihood = -133.72426  
+Iteration 3:  (class) log likelihood = -133.72231  
+Iteration 4:  (class) log likelihood = -133.72231  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1247.3069  
+Iteration 1:  (outcome) log likelihood = -1247.3069  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1424.3315
+Iteration 1:  (EM) log likelihood =  -1441.239
+Iteration 2:  (EM) log likelihood = -1449.7378
+Iteration 3:  (EM) log likelihood = -1454.4611
+Iteration 4:  (EM) log likelihood = -1457.2266
+Iteration 5:  (EM) log likelihood = -1458.9029
+Iteration 6:  (EM) log likelihood = -1459.9489
+Iteration 7:  (EM) log likelihood = -1460.6206
+Iteration 8:  (EM) log likelihood = -1461.0646
+Iteration 9:  (EM) log likelihood = -1461.3669
+Iteration 10: (EM) log likelihood = -1461.5783
+Iteration 11: (EM) log likelihood =   -1461.73
+Iteration 12: (EM) log likelihood = -1461.8409
+Iteration 13: (EM) log likelihood = -1461.9224
+Iteration 14: (EM) log likelihood = -1461.9846
+Iteration 15: (EM) log likelihood = -1462.0323
+Iteration 16: (EM) log likelihood =  -1462.069
+Iteration 17: (EM) log likelihood = -1462.0976
+Iteration 18: (EM) log likelihood = -1462.1199
+Iteration 19: (EM) log likelihood = -1462.1374
+Iteration 20: (EM) log likelihood = -1462.1513
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1310.4324  
+Iteration 1:  Log likelihood = -1310.4323  
+Iteration 2:  Log likelihood = -1310.4323  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1310.4323
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+     1.treat |  -1.554464   .5499289    -2.83   0.005    -2.632305   -.4766228
+       _cons |   .5981877   .5399419     1.11   0.268     -.460079    1.656454
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_death_pe~y
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_death_penalty        |
+                         _cons |   60.49843   2.734911    22.12   0.000      55.1381    65.85875
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_death_penalty)|   186.4727   25.76545                      142.2337    244.4715
+------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_death_pe~y
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_death_penalty        |
+                         _cons |   73.71912   1.430993    51.52   0.000     70.91442    76.52381
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_death_penalty)|   59.76095   18.07512                      33.03433    108.1109
+------------------------------------------------------------------------------------------------
+
+. * [B] see the header block
+. margins treat, predict(classpr)
+
+Adjusted predictions                                       Number of obs = 333
+Model VCE: OIM
+
+Expression: Predicted probability (1.Class), predict(classpr)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |
+          0  |   .3547584   .1235953     2.87   0.004      .112516    .5970008
+          1  |   .7223756   .1700648     4.25   0.000     .3890547    1.055696
+------------------------------------------------------------------------------
+
+. 
+. *------------------------------------------------------------------ COLUMN (4)
+. local y guesses_m_immunizations
+
+. fmm 1: regress `y'
+
+Iteration 0:  Log likelihood = -1440.7635  
+Iteration 1:  Log likelihood = -1440.7635  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1440.7635
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_immuniza~s
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_immunizations        |
+                         _cons |   79.64865   1.003614    79.36   0.000      77.6816     81.6157
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_immunizations)|   335.4111   25.99383                      288.1447    390.4309
+------------------------------------------------------------------------------------------------
+
+. estat ic
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        333          .  -1440.763       2   2885.527   2893.143
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.
+
+. fmm 2: regress `y'
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -230.81651  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1166.8059  
+Iteration 1:  (outcome) log likelihood = -1166.8059  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1430.2444
+Iteration 1:  (EM) log likelihood = -1440.4682
+Iteration 2:  (EM) log likelihood = -1444.4146
+Iteration 3:  (EM) log likelihood = -1446.0838
+Iteration 4:  (EM) log likelihood = -1446.8198
+Iteration 5:  (EM) log likelihood =  -1447.151
+Iteration 6:  (EM) log likelihood = -1447.3014
+Iteration 7:  (EM) log likelihood = -1447.3707
+Iteration 8:  (EM) log likelihood = -1447.4029
+Iteration 9:  (EM) log likelihood = -1447.4183
+
+Fitting full model:
+
+Iteration 0:  Log likelihood =  -1353.921  (not concave)
+Iteration 1:  Log likelihood = -1350.6604  (backed up)
+Iteration 2:  Log likelihood = -1344.4419  
+Iteration 3:  Log likelihood = -1341.1147  
+Iteration 4:  Log likelihood = -1340.8046  
+Iteration 5:  Log likelihood = -1340.7949  
+Iteration 6:  Log likelihood = -1340.7949  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1340.7949
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+       _cons |   .7209188   .2197504     3.28   0.001     .2902159    1.151622
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_immuniza~s
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_immunizations        |
+                         _cons |   62.02141   3.174071    19.54   0.000     55.80035    68.24248
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_immunizations)|   480.2408    70.3557                      360.3772    639.9718
+------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_immuniza~s
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_immunizations        |
+                         _cons |   88.22087   .7022045   125.63   0.000     86.84457    89.59716
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_immunizations)|    40.3922   8.154677                      27.19259    59.99905
+------------------------------------------------------------------------------------------------
+
+. estat ic //2893.1-2710.6
+
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |        333          .  -1340.795       5    2691.59    2710.63
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.
+
+. 
+. * [A] see the header block
+. fmm 2, lcprob(i.treat): regress `y'
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -81.794844  
+Iteration 2:  (class) log likelihood = -81.032875  
+Iteration 3:  (class) log likelihood = -81.032813  
+Iteration 4:  (class) log likelihood = -81.032813  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1356.1056  
+Iteration 1:  (outcome) log likelihood = -1356.1056  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1454.9886
+Iteration 1:  (EM) log likelihood = -1463.3692
+Iteration 2:  (EM) log likelihood = -1464.6069
+Iteration 3:  (EM) log likelihood = -1458.0828
+Iteration 4:  (EM) log likelihood = -1449.0855
+Iteration 5:  (EM) log likelihood = -1442.1254
+Iteration 6:  (EM) log likelihood = -1437.6327
+Iteration 7:  (EM) log likelihood = -1434.7166
+Iteration 8:  (EM) log likelihood = -1432.6951
+Iteration 9:  (EM) log likelihood = -1431.2065
+Iteration 10: (EM) log likelihood = -1430.0661
+Iteration 11: (EM) log likelihood = -1429.1724
+Iteration 12: (EM) log likelihood = -1428.4626
+Iteration 13: (EM) log likelihood = -1427.8943
+Iteration 14: (EM) log likelihood = -1427.4366
+Iteration 15: (EM) log likelihood = -1427.0662
+Iteration 16: (EM) log likelihood = -1426.7652
+Iteration 17: (EM) log likelihood = -1426.5197
+Iteration 18: (EM) log likelihood = -1426.3187
+Iteration 19: (EM) log likelihood = -1426.1537
+Iteration 20: (EM) log likelihood = -1426.0172
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1333.5345  
+Iteration 1:  Log likelihood = -1333.5298  
+Iteration 2:  Log likelihood = -1333.5298  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1333.5298
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+     1.treat |  -1.144491   .3077625    -3.72   0.000    -1.747694   -.5412875
+       _cons |    1.23218   .2535134     4.86   0.000     .7353026    1.729057
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_immuniza~s
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_immunizations        |
+                         _cons |   63.15941   2.831533    22.31   0.000     57.60971    68.70911
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_immunizations)|   464.8729   63.95469                      355.0018    608.7486
+------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_immuniza~s
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_immunizations        |
+                         _cons |   88.61853   .5985988   148.04   0.000      87.4453    89.79176
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_immunizations)|   36.62073   5.953055                      26.62907    50.36143
+------------------------------------------------------------------------------------------------
+
+. * [B] see the header block
+. margins treat, predict(classpr)
+
+Adjusted predictions                                       Number of obs = 333
+Model VCE: OIM
+
+Expression: Predicted probability (1.Class), predict(classpr)
+
+------------------------------------------------------------------------------
+             |            Delta-method
+             |     Margin   std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |
+          0  |   .2258001   .0443178     5.10   0.000     .1389388    .3126614
+          1  |   .4780918   .0646733     7.39   0.000     .3513344    .6048492
+------------------------------------------------------------------------------
+
+. 
+. 
+. *==============================================================================
+. * VALIDATION EXERCISE -- not part of Table D.15.
+. *
+. * Produces the correlation quoted in the Appendix D.3 text:
+. * "a positive and statistically significant correlation between correct recall
+. *  and classification as the low-belief, silence-attentive type (Type 1)
+. *  (rho = 0.072, p = 0.009)".
+. *
+. *==============================================================================
+. 
+. *Combine that with the recall questions, correlationL 0.072
+. use "$data/TC_cleaned.dta", clear
+(TC_cleaned -- de-identified 21 Aug 2026)
+
+. 
+. 
+. * att_silence_ = 1 if the participant's recalled number of silent group members
+. foreach var in rename_schools affirmative_action death_penalty immunizations{
+  2.         gen att_silence_`var' = 0
+  3.         forval i = 1/36{
+  4.                 quietly count if e_`var' == . & zoom_id == `i'
+  5.                 local n_s_`i' = r(N)
+  6.                 replace att_silence_`var' = 1 if abs(recall_`var'_s - `n_s_`i'')<=1  & zoom_id ==
+>  `i'
+  7.         }
+  8. }
+(1 real change made)
+(4 real changes made)
+(5 real changes made)
+(7 real changes made)
+(7 real changes made)
+(5 real changes made)
+(7 real changes made)
+(3 real changes made)
+(3 real changes made)
+(7 real changes made)
+(7 real changes made)
+(6 real changes made)
+(3 real changes made)
+(9 real changes made)
+(10 real changes made)
+(7 real changes made)
+(2 real changes made)
+(4 real changes made)
+(3 real changes made)
+(5 real changes made)
+(3 real changes made)
+(9 real changes made)
+(8 real changes made)
+(5 real changes made)
+(3 real changes made)
+(6 real changes made)
+(6 real changes made)
+(5 real changes made)
+(6 real changes made)
+(0 real changes made)
+(5 real changes made)
+(7 real changes made)
+(4 real changes made)
+(6 real changes made)
+(6 real changes made)
+(6 real changes made)
+(1 real change made)
+(5 real changes made)
+(4 real changes made)
+(7 real changes made)
+(7 real changes made)
+(9 real changes made)
+(7 real changes made)
+(6 real changes made)
+(0 real changes made)
+(8 real changes made)
+(9 real changes made)
+(5 real changes made)
+(4 real changes made)
+(7 real changes made)
+(6 real changes made)
+(7 real changes made)
+(2 real changes made)
+(5 real changes made)
+(2 real changes made)
+(6 real changes made)
+(3 real changes made)
+(5 real changes made)
+(7 real changes made)
+(5 real changes made)
+(3 real changes made)
+(5 real changes made)
+(7 real changes made)
+(6 real changes made)
+(8 real changes made)
+(1 real change made)
+(7 real changes made)
+(6 real changes made)
+(6 real changes made)
+(5 real changes made)
+(4 real changes made)
+(3 real changes made)
+(7 real changes made)
+(5 real changes made)
+(5 real changes made)
+(5 real changes made)
+(6 real changes made)
+(6 real changes made)
+(7 real changes made)
+(4 real changes made)
+(8 real changes made)
+(7 real changes made)
+(9 real changes made)
+(3 real changes made)
+(6 real changes made)
+(8 real changes made)
+(10 real changes made)
+(8 real changes made)
+(7 real changes made)
+(6 real changes made)
+(1 real change made)
+(6 real changes made)
+(3 real changes made)
+(7 real changes made)
+(10 real changes made)
+(6 real changes made)
+(7 real changes made)
+(7 real changes made)
+(5 real changes made)
+(3 real changes made)
+(7 real changes made)
+(0 real changes made)
+(7 real changes made)
+(7 real changes made)
+(3 real changes made)
+(6 real changes made)
+(3 real changes made)
+(4 real changes made)
+(6 real changes made)
+(5 real changes made)
+(4 real changes made)
+(5 real changes made)
+(5 real changes made)
+(6 real changes made)
+(7 real changes made)
+(5 real changes made)
+(4 real changes made)
+(7 real changes made)
+(7 real changes made)
+(5 real changes made)
+(4 real changes made)
+(6 real changes made)
+(6 real changes made)
+(7 real changes made)
+(0 real changes made)
+(0 real changes made)
+(6 real changes made)
+(5 real changes made)
+(1 real change made)
+(6 real changes made)
+(0 real changes made)
+(7 real changes made)
+(5 real changes made)
+(8 real changes made)
+(6 real changes made)
+(6 real changes made)
+(4 real changes made)
+(0 real changes made)
+(5 real changes made)
+(5 real changes made)
+(6 real changes made)
+(6 real changes made)
+(5 real changes made)
+(4 real changes made)
+
+. 
+. * frac_*_s_a is not used below; the summary is displayed for reference only.
+. foreach var in rename_schools affirmative_action death_penalty immunizations daylight_saving{
+  2.         gen frac_`var'_s_a = recall_`var'_s_a/recall_`var'_s
+  3.         preserve
+  4.         drop if frac_`var'_s_a > 1
+  5.         sum frac_`var'_s_a if treat == 1
+  6.         restore
+  7. }
+(3 missing values generated)
+(6 observations deleted)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+frac_renam~a |        165    .4308081    .1727847          0          1
+(2 missing values generated)
+(7 observations deleted)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+frac_affir~a |        162    .5030784    .1821333          0          1
+(8 missing values generated)
+(22 observations deleted)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+frac_death~a |        156    .6238782    .2247914          0          1
+(48 missing values generated)
+(65 observations deleted)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+frac_immun~a |        128    .7387928    .2193074          0          1
+(17 missing values generated)
+(31 observations deleted)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+frac_dayli~a |        152    .7554172     .194612          0          1
+
+. 
+. foreach var in rename_schools affirmative_action death_penalty immunizations{
+  2.     fmm 2, lcprob(i.treat): regress guesses_m_`var'
+  3. 
+.     capture drop post*
+  4. 
+.     predict post*, classposteriorpr
+  5. 
+.     gen type_`var' = (post1 > 0.5)
+  6. }
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -76.769923  
+Iteration 2:  (class) log likelihood = -75.635509  
+Iteration 3:  (class) log likelihood = -75.635109  
+Iteration 4:  (class) log likelihood = -75.635109  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1262.3491  
+Iteration 1:  (outcome) log likelihood = -1262.3491  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1358.4995
+Iteration 1:  (EM) log likelihood = -1359.1852
+Iteration 2:  (EM) log likelihood = -1357.1693
+Iteration 3:  (EM) log likelihood = -1354.8274
+Iteration 4:  (EM) log likelihood = -1352.5652
+Iteration 5:  (EM) log likelihood = -1350.4536
+Iteration 6:  (EM) log likelihood = -1348.5009
+Iteration 7:  (EM) log likelihood = -1346.7024
+Iteration 8:  (EM) log likelihood = -1345.0511
+Iteration 9:  (EM) log likelihood = -1343.5395
+Iteration 10: (EM) log likelihood = -1342.1599
+Iteration 11: (EM) log likelihood = -1340.9048
+Iteration 12: (EM) log likelihood = -1339.7665
+Iteration 13: (EM) log likelihood = -1338.7379
+Iteration 14: (EM) log likelihood = -1337.8121
+Iteration 15: (EM) log likelihood = -1336.9821
+Iteration 16: (EM) log likelihood = -1336.2417
+Iteration 17: (EM) log likelihood = -1335.5847
+Iteration 18: (EM) log likelihood = -1335.0053
+Iteration 19: (EM) log likelihood = -1334.4979
+Iteration 20: (EM) log likelihood = -1334.0574
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1286.4314  (not concave)
+Iteration 1:  Log likelihood = -1286.4008  (backed up)
+Iteration 2:  Log likelihood = -1285.5532  
+Iteration 3:  Log likelihood = -1284.8163  
+Iteration 4:  Log likelihood = -1284.3839  
+Iteration 5:  Log likelihood =  -1284.355  
+Iteration 6:  Log likelihood = -1284.3539  
+Iteration 7:  Log likelihood = -1284.3538  
+Iteration 8:  Log likelihood = -1284.3538  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1284.3538
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+     1.treat |  -15.47657    430.638    -0.04   0.971    -859.5115    828.5583
+       _cons |   16.40781    430.638     0.04   0.970    -827.6272    860.4429
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_rename_s~s
+Model:    regress             
+
+-------------------------------------------------------------------------------------------------
+                                | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+guesses_m_rename_schools        |
+                          _cons |   38.87238   5.913628     6.57   0.000     27.28188    50.46287
+--------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_rename_schools)|   210.3388   53.93844                       127.245    347.6947
+-------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_rename_s~s
+Model:    regress             
+
+-------------------------------------------------------------------------------------------------
+                                | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+--------------------------------+----------------------------------------------------------------
+guesses_m_rename_schools        |
+                          _cons |   55.53974   .8155211    68.10   0.000     53.94134    57.13813
+--------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_rename_schools)|   100.9647   9.107393                      84.60345      120.49
+-------------------------------------------------------------------------------------------------
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -91.533119  
+Iteration 2:  (class) log likelihood = -91.259455  
+Iteration 3:  (class) log likelihood = -91.258554  
+Iteration 4:  (class) log likelihood = -91.258554  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1255.4051  
+Iteration 1:  (outcome) log likelihood = -1255.4051  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1378.5438
+Iteration 1:  (EM) log likelihood = -1387.5649
+Iteration 2:  (EM) log likelihood = -1391.9063
+Iteration 3:  (EM) log likelihood = -1394.9093
+Iteration 4:  (EM) log likelihood = -1397.4262
+Iteration 5:  (EM) log likelihood =  -1399.712
+Iteration 6:  (EM) log likelihood = -1401.8525
+Iteration 7:  (EM) log likelihood = -1403.8798
+Iteration 8:  (EM) log likelihood = -1405.8088
+Iteration 9:  (EM) log likelihood = -1407.6476
+Iteration 10: (EM) log likelihood = -1409.4021
+Iteration 11: (EM) log likelihood = -1411.0769
+Iteration 12: (EM) log likelihood = -1412.6753
+Iteration 13: (EM) log likelihood =    -1414.2
+Iteration 14: (EM) log likelihood = -1415.6533
+Iteration 15: (EM) log likelihood = -1417.0367
+Iteration 16: (EM) log likelihood = -1418.3514
+Iteration 17: (EM) log likelihood = -1419.5984
+Iteration 18: (EM) log likelihood = -1420.7781
+Iteration 19: (EM) log likelihood = -1421.8908
+Iteration 20: (EM) log likelihood = -1422.9366
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood =   -1291.72  (not concave)
+Iteration 1:  Log likelihood = -1291.1927  
+Iteration 2:  Log likelihood = -1289.4159  
+Iteration 3:  Log likelihood = -1289.1896  
+Iteration 4:  Log likelihood = -1289.1616  
+Iteration 5:  Log likelihood = -1289.1615  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1289.1615
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+     1.treat |  -2.403284   .7082579    -3.39   0.001    -3.791444   -1.015124
+       _cons |   3.052292   .8286015     3.68   0.000     1.428263    4.676321
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_affirmat~n
+Model:    regress             
+
+-----------------------------------------------------------------------------------------------------
+                                    | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------------------------+----------------------------------------------------------------
+guesses_m_affirmative_action        |
+                              _cons |   41.13353   5.491717     7.49   0.000     30.36996     51.8971
+------------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_affirmative_action)|   199.5062   51.54127                      120.2412    331.0239
+-----------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_affirmat~n
+Model:    regress             
+
+-----------------------------------------------------------------------------------------------------
+                                    | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+------------------------------------+----------------------------------------------------------------
+guesses_m_affirmative_action        |
+                              _cons |   57.43719   .8143564    70.53   0.000     55.84108     59.0333
+------------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_affirmative_action)|    90.7098   9.506493                      73.86646    111.3938
+-----------------------------------------------------------------------------------------------------
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -134.20722  
+Iteration 2:  (class) log likelihood = -133.72426  
+Iteration 3:  (class) log likelihood = -133.72231  
+Iteration 4:  (class) log likelihood = -133.72231  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1247.3069  
+Iteration 1:  (outcome) log likelihood = -1247.3069  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1424.3315
+Iteration 1:  (EM) log likelihood =  -1441.239
+Iteration 2:  (EM) log likelihood = -1449.7378
+Iteration 3:  (EM) log likelihood = -1454.4611
+Iteration 4:  (EM) log likelihood = -1457.2266
+Iteration 5:  (EM) log likelihood = -1458.9029
+Iteration 6:  (EM) log likelihood = -1459.9489
+Iteration 7:  (EM) log likelihood = -1460.6206
+Iteration 8:  (EM) log likelihood = -1461.0646
+Iteration 9:  (EM) log likelihood = -1461.3669
+Iteration 10: (EM) log likelihood = -1461.5783
+Iteration 11: (EM) log likelihood =   -1461.73
+Iteration 12: (EM) log likelihood = -1461.8409
+Iteration 13: (EM) log likelihood = -1461.9224
+Iteration 14: (EM) log likelihood = -1461.9846
+Iteration 15: (EM) log likelihood = -1462.0323
+Iteration 16: (EM) log likelihood =  -1462.069
+Iteration 17: (EM) log likelihood = -1462.0976
+Iteration 18: (EM) log likelihood = -1462.1199
+Iteration 19: (EM) log likelihood = -1462.1374
+Iteration 20: (EM) log likelihood = -1462.1513
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1310.4324  
+Iteration 1:  Log likelihood = -1310.4323  
+Iteration 2:  Log likelihood = -1310.4323  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1310.4323
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+     1.treat |  -1.554464   .5499289    -2.83   0.005    -2.632305   -.4766228
+       _cons |   .5981877   .5399419     1.11   0.268     -.460079    1.656454
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_death_pe~y
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_death_penalty        |
+                         _cons |   60.49843   2.734911    22.12   0.000      55.1381    65.85875
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_death_penalty)|   186.4727   25.76545                      142.2337    244.4715
+------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_death_pe~y
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_death_penalty        |
+                         _cons |   73.71912   1.430993    51.52   0.000     70.91442    76.52381
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_death_penalty)|   59.76095   18.07512                      33.03433    108.1109
+------------------------------------------------------------------------------------------------
+
+Fitting class model:
+
+Iteration 0:  (class) log likelihood = -230.81651  
+Iteration 1:  (class) log likelihood = -81.794844  
+Iteration 2:  (class) log likelihood = -81.032875  
+Iteration 3:  (class) log likelihood = -81.032813  
+Iteration 4:  (class) log likelihood = -81.032813  
+
+Fitting outcome model:
+
+Iteration 0:  (outcome) log likelihood = -1356.1056  
+Iteration 1:  (outcome) log likelihood = -1356.1056  
+
+Refining starting values:
+
+Iteration 0:  (EM) log likelihood = -1454.9886
+Iteration 1:  (EM) log likelihood = -1463.3692
+Iteration 2:  (EM) log likelihood = -1464.6069
+Iteration 3:  (EM) log likelihood = -1458.0828
+Iteration 4:  (EM) log likelihood = -1449.0855
+Iteration 5:  (EM) log likelihood = -1442.1254
+Iteration 6:  (EM) log likelihood = -1437.6327
+Iteration 7:  (EM) log likelihood = -1434.7166
+Iteration 8:  (EM) log likelihood = -1432.6951
+Iteration 9:  (EM) log likelihood = -1431.2065
+Iteration 10: (EM) log likelihood = -1430.0661
+Iteration 11: (EM) log likelihood = -1429.1724
+Iteration 12: (EM) log likelihood = -1428.4626
+Iteration 13: (EM) log likelihood = -1427.8943
+Iteration 14: (EM) log likelihood = -1427.4366
+Iteration 15: (EM) log likelihood = -1427.0662
+Iteration 16: (EM) log likelihood = -1426.7652
+Iteration 17: (EM) log likelihood = -1426.5197
+Iteration 18: (EM) log likelihood = -1426.3187
+Iteration 19: (EM) log likelihood = -1426.1537
+Iteration 20: (EM) log likelihood = -1426.0172
+note: EM algorithm reached maximum iterations.
+
+Fitting full model:
+
+Iteration 0:  Log likelihood = -1333.5345  
+Iteration 1:  Log likelihood = -1333.5298  
+Iteration 2:  Log likelihood = -1333.5298  
+
+Finite mixture model                                       Number of obs = 333
+Log likelihood = -1333.5298
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+1.Class      |  (base outcome)
+-------------+----------------------------------------------------------------
+2.Class      |
+     1.treat |  -1.144491   .3077625    -3.72   0.000    -1.747694   -.5412875
+       _cons |    1.23218   .2535134     4.86   0.000     .7353026    1.729057
+------------------------------------------------------------------------------
+
+Class:    1                   
+Response: guesses_m_immuniza~s
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_immunizations        |
+                         _cons |   63.15941   2.831533    22.31   0.000     57.60971    68.70911
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_immunizations)|   464.8729   63.95469                      355.0018    608.7486
+------------------------------------------------------------------------------------------------
+
+Class:    2                   
+Response: guesses_m_immuniza~s
+Model:    regress             
+
+------------------------------------------------------------------------------------------------
+                               | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------------------+----------------------------------------------------------------
+guesses_m_immunizations        |
+                         _cons |   88.61853   .5985988   148.04   0.000      87.4453    89.79176
+-------------------------------+----------------------------------------------------------------
+ var(e.guesses_m_immunizations)|   36.62073   5.953055                      26.62907    50.36143
+------------------------------------------------------------------------------------------------
+
+. 
+. preserve
+
+. keep att_silence* type_* treat gender race year major ideology survey_id zoom_id moderator week grou
+> p_size session_time
+
+. 
+. reshape long att_silence_ type_ , i(survey_id) j(topic) string
+(j = affirmative_action death_penalty immunizations rename_schools)
+
+Data                               Wide   ->   Long
+-----------------------------------------------------------------------------
+Number of observations              333   ->   1,332       
+Number of variables                  20   ->   15          
+j variable (4 values)                     ->   topic
+xij variables:
+att_silence_affirmative_action att_silence_death_penalty ... att_silence_rename_schools->att_silence_
+type_affirmative_action type_death_penalty ... type_rename_schools->type_
+-----------------------------------------------------------------------------
+
+. encode topic, generate(topic_id)
+
+. 
+. * -> rho = 0.072, p = 0.009 as quoted in the Appendix D.3 text
+. pwcorr att_silence_ type_,sig
+
+             | att_si~_    type_
+-------------+------------------
+att_silence_ |   1.0000 
+             |
+             |
+       type_ |   0.0718   1.0000 
+             |   0.0088
+             |
+
+. restore
+
+. 
+end of do-file
+
+. log close exhibit
+      name:  exhibit
+       log:  /Users/yihong/Desktop/Silence Replicate Final/logs/Table_D15.log
+  log type:  text
+ closed on:  27 Aug 2026, 11:52:36
+------------------------------------------------------------------------------------------------------

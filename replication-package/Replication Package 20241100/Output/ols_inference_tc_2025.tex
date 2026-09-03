@@ -1,0 +1,24 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{midline\_inference}
+\begin{tabular}{l*{6}{c}}
+\hline\hline
+                                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+                                &\multicolumn{1}{c}{guesses\_m\_}&\multicolumn{1}{c}{guesses\_m\_}&\multicolumn{1}{c}{guesses\_m\_}&\multicolumn{1}{c}{guesses\_e\_}&\multicolumn{1}{c}{guesses\_e\_}&\multicolumn{1}{c}{guesses\_e\_}\\
+\hline
+Treat                           &   -8.775\sym{***}&   -8.402\sym{***}&   -8.483\sym{***}&   -12.12\sym{***}&   -11.45\sym{***}&   -15.03\sym{***}\\
+                                &  (1.116)         &  (1.045)         &  (1.028)         &  (3.086)         &  (2.911)         &  (1.730)         \\
+Private Agree                   &                  &    3.895\sym{***}&    2.878\sym{***}&                  &    6.155\sym{***}&    4.517\sym{***}\\
+                                &                  &  (1.024)         &  (1.102)         &                  &  (1.315)         &  (1.338)         \\
+guesses\_b\_                      &                  &    0.143\sym{***}&    0.136\sym{***}&                  &   0.0963\sym{***}&   0.0627\sym{**} \\
+                                &                  & (0.0264)         & (0.0267)         &                  & (0.0263)         & (0.0279)         \\
+\hline
+Mean                            &    63.83         &    63.83         &    63.83         &    65.66         &    65.66         &    65.66         \\
+SD                              &    15.00         &    15.00         &    15.00         &    19.19         &    19.19         &    19.19         \\
+IDs                             &      201         &      201         &      201         &      201         &      201         &      201         \\
+Obs                             &      804         &      793         &      793         &      804         &      793         &      793         \\
+\hline\hline
+\multicolumn{7}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{7}{l}{\footnotesize \sym{*} \(p<0.1\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}
